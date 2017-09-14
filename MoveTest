@@ -1,0 +1,31 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
+
+public class MovementDrone : MonoBehaviour {
+
+    private float m_forward_back;
+    private float m_right_left;
+    public float m_rotateSpeed = 2;
+    public float m_moveSpeed = 1.22f;
+    public float m_heightJump = 0.55f;
+
+    // Use this for initialization
+    void Start () {
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+        m_forward_back = CrossPlatformInputManager.GetAxis("Vertical");
+        m_right_left = CrossPlatformInputManager.GetAxis("Horizontal");
+        transform.Translate(0f, 0f, m_forward_back * m_moveSpeed);
+        transform.Rotate(0f, m_right_left * m_rotateSpeed, 0f);
+        if (Input.GetKey("space"))
+        {
+             transform.Translate(Vector3.up * m_heightJump, Space.World);
+        }
+
+    }
+}
